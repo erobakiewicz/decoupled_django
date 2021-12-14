@@ -1,0 +1,9 @@
+from django.urls import path
+
+from billing.views import Index
+
+app_name = 'billing'
+
+urlpatterns = [
+    path('', Index.as_view(), name="index"),
+]
