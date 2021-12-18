@@ -1,21 +1,17 @@
+
 import environ
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 env = environ.Env()
-env.read_env()
 
+environ.Env.read_env()
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('DJANGO_SECRET_KEY')
+SECRET_KEY = env("SECRET_KEY")
+DEBUG = env.bool("DEBUG", False)
 
-DEBUG = env.bool('DJANGO_DEBUG', default=False)
-
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=[])
-
-
-# Application definition
+DJANGO_SETTINGS_MODULE = env('DJANGO_SETTINGS_MODULE')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -25,7 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
-    'billing.apps.BillingConfig'
+    'billing.apps.BillingConfig',
     'rest_framework',
 ]
 
@@ -60,13 +56,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'decoupled_django.wsgi.application'
 
-
 DATABASES = {
-    'default': {
-        **env.db('DATABASE_URL'),
-        'CONN_MAX_AGE': 3600,  # 1h
-    },
+    # read os.environ['DATABASE_URL'] and raises
+    # ImproperlyConfigured exception if not found
+    #
+    # The db() method is an alias for db_url().
+    'default': env.db(),
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -92,7 +89,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 STATIC_URL = env("STATIC_URL")
 AUTH_USER_MODEL = "users.User"
