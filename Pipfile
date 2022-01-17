@@ -10,6 +10,7 @@ psycopg2-binary = "*"
 django-extensions = "*"
 uvicorn = "*"
 djangorestframework = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
