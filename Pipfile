@@ -11,6 +11,10 @@ django-extensions = "*"
 uvicorn = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
+pytest = "*"
+pytest-django = "*"
+model-bakery = "*"
+flake8 = "*"
 
 [dev-packages]
 
