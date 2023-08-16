@@ -11,6 +11,7 @@ django-extensions = "*"
 uvicorn = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
+flake8 = "*"
 
 [dev-packages]
 
